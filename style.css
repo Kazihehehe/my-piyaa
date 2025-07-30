@@ -23,16 +23,15 @@ body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(to ri
     box-shadow: 0 0 15px 5px rgba(255, 192, 203, 0.5);
   }
 }
-/* 📦 Surprise Button Container */
 .surprise-button-container {
   text-align: center;
-  margin: 40px 0;
+  margin: 30px auto;
+  display: block;
 }
 
-/* 🎁 Surprise Button Styling */
 .surprise-button {
-  background-color: #a8d5ba; /* Sage green */
-  color: white;
+  background-color: #a8d5ba;
+  color: #fff;
   border: none;
   border-radius: 30px;
   padding: 12px 25px;
@@ -43,15 +42,14 @@ body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(to ri
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover effect */
 .surprise-button:hover {
   transform: scale(1.05);
   box-shadow: 0 0 25px rgba(168, 213, 186, 0.9);
 }
 
-/* Slide-in animation */
+/* Animation */
 .slide-in-bottom {
-  animation: slideInBottom 1s ease-in-out;
+  animation: slideInBottom 1.5s ease forwards;
 }
 
 @keyframes slideInBottom {
@@ -64,3 +62,4 @@ body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(to ri
     transform: translateY(0);
   }
 }
+
