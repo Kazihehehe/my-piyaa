@@ -2,9 +2,10 @@ body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(to ri
 /* 🌐 Default for larger screens (PC) */
 .video-frame {
   width:700px;
-  height:700px;
+  height:500px;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   max-width: 100%;
   margin: 0 auto;
   border: 4px solid #a8d5ba;
