@@ -4,7 +4,7 @@ body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(to ri
   width:700px;
   height:500px;
   display: block;
-  object-fit: contain;
+  object-fit:cover;
   max-width: 100%;
   margin: 0 auto;
   border: 4px solid #a8d5ba;
