@@ -805,7 +805,7 @@ document.addEventListener('DOMContentLoaded', () => {
   transform-origin: center center;
   width: auto;
   height: 100%;
-  max-height: 600px; /* or whatever fits your layout */
+  max-height: 800px; /* or whatever fits your layout */
   display: block;
   margin: auto;
 }
