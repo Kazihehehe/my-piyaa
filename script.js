@@ -15,10 +15,11 @@
   });
 
   // ⏳ Countdown timer logic
+if (timerElement) {
   function getNextBirthday() {
     const now = new Date();
     const thisYear = now.getFullYear();
-    let birthday = new Date(thisYear, 6, 27); // July = month 6
+    let birthday = new Date(thisYear, 6, 27); // July = 6 (0-based)
     if (now > birthday) {
       birthday = new Date(thisYear + 1, 6, 27);
     }
@@ -40,6 +41,9 @@
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
+}
+
+  
 
   // 🌸 Floating Emoji Spawner
   const emojis = ["🌷", "🍜", "🥹", "🍰", "🎉"];
