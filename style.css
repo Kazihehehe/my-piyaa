@@ -16,8 +16,8 @@ body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(to ri
 /* 📱 Style override for phone screens */
 @media (max-width: 600px) {
   .video-frame {
-    width: 100%;
-    height: auto;
+    width:320px;
+    height: 200px;
     border: 3px dashed #ffc0cb; /* Pink dashed frame */
     border-radius: 8px;
     box-shadow: 0 0 15px 5px rgba(255, 192, 203, 0.5);
