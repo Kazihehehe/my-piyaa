@@ -13,39 +13,7 @@
   <link rel="stylesheet" href="style.css"/>
 
 </head>
-  <script>
-  async function logVisit() {
-    try {
-      const userAgent = navigator.userAgent;
-      const timeNow = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-
-      const response = await fetch('https://ipapi.co/json/');
-      const data = await response.json();
-
-      const logData = {
-        ip: data.ip,
-        city: data.city,
-        region: data.region,
-        country: data.country_name,
-        userAgent: userAgent,
-        time: timeNow
-      };
-
-      // 🔍 Console Output
-      console.log("👤 Visitor Info:");
-      console.log("🕒 Time:", logData.time);
-      console.log("🌍 IP:", logData.ip);
-      console.log("🏙️ Location:", `${logData.city}, ${logData.region}, ${logData.country}`);
-      console.log("📱 Device Info:", logData.userAgent);
-
-    } catch (err) {
-      console.error("Tracking failed:", err);
-    }
-  }
-
-  logVisit();
-</script>
-
+  
 
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7R959TGV4Y"></script>
@@ -430,6 +398,39 @@
         time: timeNow
       };
 
+      // 🔍 Console Output
+      console.log("👤 Visitor Info:");
+      console.log("🕒 Time:", logData.time);
+      console.log("🌍 IP:", logData.ip);
+      console.log("🏙️ Location:", `${logData.city}, ${logData.region}, ${logData.country}`);
+      console.log("📱 Device Info:", logData.userAgent);
+
+    } catch (err) {
+      console.error("Tracking failed:", err);
+    }
+  }
+
+  logVisit();
+</script>
+
+  <script>
+  async function logVisit() {
+    try {
+      const userAgent = navigator.userAgent;
+      const timeNow = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+
+      const logData = {
+        ip: data.ip,
+        city: data.city,
+        region: data.region,
+        country: data.country_name,
+        userAgent: userAgent,
+        time: timeNow
+      };
+
       // 👉 REPLACE this URL with your own Google Apps Script URL:
       const scriptURL = 'https://script.google.com/macros/s/AKfycbwdAZJIVby_T-nfO0F4IfS-PkEAY6Nq6e6wCPAahOc54VB2iAN7wbl4dMreHZpfwJCf/exec';
 
@@ -452,6 +453,7 @@
 
 </body>
 </html>
+
 
 
 
