@@ -116,3 +116,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const elements = document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-bottom');
   elements.forEach(el => observer.observe(el));
 });
+
+async function logVisit(ip, location, device, time) {
+  const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdcYPKyjEps70MN2Qx0l8Z-NxMMLBFTIt-8niPCg8yxZIHaUQ/formResponse';
+
+  const formData = new FormData();
+  formData.append('entry.453679306', ip);
+  formData.append('entry.1666507460', location);
+  formData.append('entry.1006184519', device);
+  formData.append('entry.334390720', time);
+
+  try {
+    await fetch(formUrl, {
+      method: 'POST',
+      mode: 'no-cors', // Important to bypass CORS restrictions
+      body: formData,
+    });
+
+    console.log("✅ Visitor logged to Google Form.");
+  } catch (error) {
+    console.error("❌ Visitor tracking failed:", error);
+  }
+}
