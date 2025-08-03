@@ -117,5 +117,80 @@ document.addEventListener('DOMContentLoaded', () => {
   elements.forEach(el => observer.observe(el));
 });
 
+function checkLogin() {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const errorMsg = document.getElementById("errorMsg");
 
+  // Set your own fixed credentials here:
+  const validUsername = "Rafiza";
+  const validPassword = "123456";
+
+  if (username === validUsername && password === validPassword) {
+    // Redirect to your main page
+    window.location.href = "main.html"; // change to your actual home page
+  } else {
+    errorMsg.textContent = "❌ Invalid username or password.";
+  }
+}
+
+
+const canvas = document.getElementById("leaves-canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const leaves = [];
+const leafImg = new Image();
+leafImg.src = "https://i.imgur.com/YG6sXgN.png"; // 🍁 A leaf image (transparent background)
+
+function Leaf() {
+  this.x = Math.random() * canvas.width;
+  this.y = Math.random() * canvas.height;
+  this.speed = 1 + Math.random() * 3;
+  this.size = 20 + Math.random() * 30;
+  this.angle = Math.random() * 360;
+  this.spin = 0.02 + Math.random() * 0.05;
+
+  this.draw = () => {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+    ctx.drawImage(leafImg, -this.size/2, -this.size/2, this.size, this.size);
+    ctx.restore();
+  };
+
+  this.update = () => {
+    this.y += this.speed;
+    this.angle += this.spin;
+    if (this.y > canvas.height) {
+      this.y = -this.size;
+      this.x = Math.random() * canvas.width;
+    }
+    this.draw();
+  };
+}
+
+function initLeaves() {
+  for (let i = 0; i < 30; i++) {
+    leaves.push(new Leaf());
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  leaves.forEach(leaf => leaf.update());
+  requestAnimationFrame(animate);
+}
+
+leafImg.onload = () => {
+  initLeaves();
+  animate();
+};
 
