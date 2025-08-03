@@ -6,8 +6,8 @@ const app = express();
 const PORT = 3000;
 
 // Preset credentials (can be replaced with DB logic)
-const USERNAME = "yourUsername";
-const PASSWORD = "yourPassword";
+const USERNAME = "Rafiza";
+const PASSWORD = "kazi";
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,4 +25,5 @@ app.post('/login', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
 
