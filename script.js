@@ -118,19 +118,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function checkLogin() {
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const errorMsg = document.getElementById("errorMsg");
+  const user = document.getElementById('username').value;
+  const pass = document.getElementById('password').value;
+  const error = document.getElementById('errorMsg');
 
-  // Set your own fixed credentials here:
-  const validUsername = "Rafiza";
-  const validPassword = "123456";
+  const correctUser = "piyaa"; // 🌸 your preset username
+  const correctPass = "18party"; // 🎉 your preset password
 
-  if (username === validUsername && password === validPassword) {
-    // Redirect to your main page
-    window.location.href = "main.html"; // change to your actual home page
+  if (user === correctUser && pass === correctPass) {
+    window.location.href = "home.html"; // ⬅️ redirects to your actual site
   } else {
-    errorMsg.textContent = "❌ Invalid username or password.";
+    error.textContent = "❌ Invalid username or password.";
   }
 }
 
@@ -193,4 +191,5 @@ leafImg.onload = () => {
   initLeaves();
   animate();
 };
+
 
