@@ -192,4 +192,10 @@ leafImg.onload = () => {
   animate();
 };
 
+gtag('event', 'login_attempt', {
+  'event_category': 'login',
+  'event_label': 'login_page',
+  'value': 1
+});
+
 
