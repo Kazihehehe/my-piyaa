@@ -1,4 +1,26 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+// Add this at the beginning of your existing script
+document.addEventListener('DOMContentLoaded', () => {
+  // Intro animation
+  setTimeout(() => {
+    document.querySelector('.intro-overlay').style.display = 'none';
+  }, 8000);
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('[data-scroll]').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Rest of your existing code...
+});
+document.addEventListener('DOMContentLoaded', () => {
   // Audio toggle
   const audio = document.getElementById('birthday-audio');
   const toggleButton = document.getElementById('audio-toggle');
@@ -128,4 +150,5 @@ document.getElementById('login-form')?.addEventListener('submit', (e) => {
   } else {
     alert("Invalid credentials. Try again.");
   }
+
 });
