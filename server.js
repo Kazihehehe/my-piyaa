@@ -2,14 +2,15 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+// Create server
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname)));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname));
 
-// Routes
+// Login route
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   if (email === "piyaa@example.com" && password === "18party") {
@@ -18,20 +19,17 @@ app.post('/login', (req, res) => {
   return res.status(401).send('Invalid credentials');
 });
 
-// Static file routes (must come before catch-all)
+// Serve HTML files
 app.get('/home.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'home.html'));
 });
 
-app.get('/index.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Catch-all route (must come last)
+// Catch-all route
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
