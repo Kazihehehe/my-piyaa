@@ -11,3 +11,14 @@
     "express": "^5.1.0"
   }
 }
+{
+  "browserslist": [
+    "defaults"
+  ],
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'Client-side assets built'",
+    "serve": "serve -s . -l 3000"
+  }
+}
