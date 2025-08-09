@@ -238,4 +238,10 @@ document.getElementById('login-form')?.addEventListener('submit', (e) => {
   }
 
 });
+// In your script.js
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
 
