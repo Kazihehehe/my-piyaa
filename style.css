@@ -1,0 +1,242 @@
+/* ===== BASE STYLES ===== */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', 'Raleway', sans-serif;
+  background: linear-gradient(to right, #fbe9f0, #e3f2fd);
+  overflow-x: hidden;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2 {
+  text-align: center;
+  color: #d81b60;
+}
+
+.birthday-heading {
+  font-family: 'Dancing Script', cursive;
+  color: #d63384;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 4px #f8bbd0;
+  margin-bottom: 20px;
+}
+
+.fancy-title {
+  font-family: 'Pacifico', cursive;
+  color: #e91e63;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.sub-text {
+  font-family: 'Quicksand', sans-serif;
+  color: #555;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.love-note {
+  font-family: 'Great Vibes', cursive;
+  color: #b33939;
+  font-size: 1.5rem;
+}
+
+.drama-text {
+  font-family: 'Indie Flower', cursive;
+  color: #673ab7;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.caption-bold {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  color: #009688;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.emotion-header {
+  font-family: 'Playfair Display', serif;
+  color: #3f51b5;
+  font-size: 1.8rem;
+}
+
+/* ===== COMPONENTS ===== */
+.main-pic {
+  display: block;
+  margin: 20px auto;
+  max-width: 300px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  animation: shimmerFade 3s ease-out;
+}
+
+.countdown {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 15px 0;
+  text-align: center;
+  color: #1a237e;
+  animation: softFadeUp 2.5s ease-out;
+}
+
+.final-surprise, 
+.game, 
+.love-letter {
+  margin: 20px 0;
+  text-align: center;
+  animation: softFadeUp 2.5s ease-out;
+}
+
+/* ===== BUTTONS ===== */
+button {
+  padding: 10px 20px;
+  background-color: #d81b60;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: softSlideRight 2.5s ease-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.audio-button {
+  background: linear-gradient(135deg, #d4e4d1, #c1d8c3);
+  color: #374a38;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1rem;
+  border-radius: 30px;
+  font-family: 'Quicksand', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(150,180,150,0.4);
+  transition: all 0.3s ease;
+}
+
+.audio-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 22px rgba(150,180,150,0.6);
+}
+
+.cry-button {
+  background: linear-gradient(135deg, #e91e63, #ffede1);
+  color: #fff;
+  animation: glowCry 2s infinite alternate;
+}
+
+.surprise-button {
+  background-color: #a8d5ba;
+  color: #fff;
+  font-family: 'Dancing Script', cursive;
+  box-shadow: 0 0 15px rgba(168,213,186,0.6);
+}
+
+/* ===== MEMORY WALL ===== */
+.birthday-memories {
+  text-align: center;
+  margin: 40px auto;
+  padding: 0 10px;
+}
+
+.layout-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1em;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.memory-entry {
+  text-align: center;
+  animation: softFadeUp 2.5s ease-out;
+}
+
+.memory-pic {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.memory-entry:hover {
+  transform: scale(1.03);
+  z-index: 2;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes softFadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmerFade {
+  0% { opacity: 0; transform: scale(0.9); filter: brightness(120%); }
+  100% { opacity: 1; transform: scale(1); filter: brightness(100%); }
+}
+
+@keyframes glowCry {
+  from { box-shadow: 0 0 12px #e91e63; }
+  to { box-shadow: 0 0 20px #f06292; }
+}
+
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 768px) {
+  .memory-entry {
+    width: 30%;
+  }
+  
+  .video-frame {
+    width: 320px;
+    height: 200px;
+    border: 3px dashed #ffc0cb;
+  }
+}
+
+/* ===== LAYOUT ===== */
+.music-fixed-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.floating-elements-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-emoji {
+  position: absolute;
+  animation: float 10s linear infinite;
+  font-size: 30px;
+}
+
+.slide-in-bottom {
+  animation: slideInBottom 1.5s ease forwards;
+}
+
+@keyframes slideInBottom {
+  from { opacity: 0; transform: translateY(100px); }
+  to { opacity: 1; transform: translateY(0); }
+}
