@@ -3,19 +3,25 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from current directory
-app.use(express.static(__dirname));
+// Middleware to parse form data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname)); // Serve static files
 
-// Handle login
+// Login route (POST)
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   if (email === "piyaa@example.com" && password === "18party") {
-    return res.redirect('/home.html');
+    return res.redirect('/home.html'); // Redirect to home.html on success
   }
-  return res.redirect('/?error=1');
+  return res.redirect('/?error=1'); // Redirect back to login on failure
 });
 
-// Catch-all route
+// Serve home.html directly when requested
+app.get('/home.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'home.html'));
+});
+
+// Default route (serve index.html)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
