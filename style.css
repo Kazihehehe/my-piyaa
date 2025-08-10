@@ -1025,3 +1025,48 @@ body {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+/* Folded Section Content */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.trait-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trait-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.trait-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.trait-card:hover .trait-icon {
+  transform: scale(1.2);
+}
+
+.trait-card h3 {
+  margin: 0.5rem 0;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.trait-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
