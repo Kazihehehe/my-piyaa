@@ -325,26 +325,96 @@ function initLoginPage() {
   });
 }
 function initHomePage() {
-  // Create floating elements
-  createFloatingElements('floating-elements', ['🌸', '🌷', '🎀', '✨', '🎂', '💖', '🎈', '🥳']);
+  // Create enhanced floating elements
+  createFloatingElements('floating-elements', 
+    ['🌸', '🌷', '🎀', '✨', '🎂', '💖', '🎈', '🥳', '🍰', '🎊', '🎇', '💫']
+  );
 
-  // Typing animation for intro text
+  // Enhanced typing animation for intro text
   const introText = document.querySelector('.intro-text');
   if (introText) {
     typeWriterEffect(introText, 
       "Once upon a time, a boy named Kazi created this for your 17th birthday\nTo make you smile today and remember him in your golden years...",
-      100
-    );
-    
-    // Remove intro overlay after animation
-    setTimeout(() => {
-      const introOverlay = document.querySelector('.intro-overlay');
-      if (introOverlay) {
-        introOverlay.style.opacity = '0';
-        setTimeout(() => introOverlay.remove(), 1000);
+      50, // Faster typing speed
+      () => {
+        // Callback when typing is complete
+        const cursor = introText.querySelector('.blinking-cursor');
+        if (cursor) {
+          cursor.style.animation = 'blink 1s step-end infinite';
+        }
+        
+        // Remove intro overlay after delay
+        setTimeout(() => {
+          const introOverlay = document.querySelector('.intro-overlay');
+          if (introOverlay) {
+            introOverlay.style.opacity = '0';
+            introOverlay.style.transform = 'scale(1.1)';
+            introOverlay.style.backdropFilter = 'blur(0px)';
+            setTimeout(() => introOverlay.remove(), 1000);
+            
+            // Show welcome popup
+            showWelcomePopup();
+          }
+        }, 3000);
       }
-    }, 7000); // Matches typing duration + extra time
+    );
   }
+  
+  // Enhanced memory entries
+  document.querySelectorAll('.memory-entry').forEach(entry => {
+    entry.style.transition = 'all 0.3s ease';
+    
+    entry.addEventListener('mouseenter', () => {
+      entry.style.transform = 'translateY(-10px) scale(1.05)';
+      entry.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
+    });
+    
+    entry.addEventListener('mouseleave', () => {
+      entry.style.transform = '';
+      entry.style.boxShadow = '';
+    });
+  });
+}
+
+function showWelcomePopup() {
+  const popup = document.createElement('div');
+  popup.className = 'custom-alert animate__animated animate__zoomIn';
+  popup.innerHTML = `
+    <div class="alert-content">
+      <h3>Happy 17th Birthday, Piyaa! 🎉</h3>
+      <p>May this year be filled with joy, laughter, and unforgettable moments. Explore your special day!</p>
+    </div>
+  `;
+  document.body.appendChild(popup);
+  
+  // Auto-remove after 10 seconds
+  setTimeout(() => {
+    popup.classList.add('animate__animated', 'animate__zoomOut');
+    setTimeout(() => popup.remove(), 500);
+  }, 10000);
+}
+
+function typeWriterEffect(element, text, speed, callback) {
+  let i = 0;
+  element.innerHTML = '';
+  
+  function type() {
+    if (i < text.length) {
+      // Handle line breaks
+      if (text.charAt(i) === '\n') {
+        element.innerHTML = element.innerHTML + '<br><span class="blinking-cursor">|</span>';
+      } else {
+        element.innerHTML = text.substring(0, i+1) + '<span class="blinking-cursor">|</span>';
+      }
+      i++;
+      setTimeout(type, speed);
+    } else {
+      element.innerHTML = text;
+      if (callback) callback();
+    }
+  }
+  
+  type();
 }
 
 // ===== HELPER FUNCTIONS =====
