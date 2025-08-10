@@ -213,32 +213,46 @@ function initLightbox() {
 // ===== PAGE-SPECIFIC FUNCTIONALITY =====
 
 function initLoginPage() {
-  // Create floating hearts with more variety
+  // Create enhanced floating hearts
   const heartContainer = document.getElementById('hearts-container');
   const heartShapes = ['❤️', '🧡', '💛', '💚', '💙', '💜', '💝', '💖', '💗', '💘'];
   
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 40; i++) {
     const heart = document.createElement('div');
     heart.className = 'heart';
     heart.textContent = heartShapes[Math.floor(Math.random() * heartShapes.length)];
     heart.style.left = Math.random() * 100 + 'vw';
     heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-    heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    heart.style.animationDuration = (Math.random() * 15 + 15) + 's';
     heart.style.animationDelay = Math.random() * 5 + 's';
     heart.style.opacity = Math.random() * 0.5 + 0.3;
+    heart.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
     heartContainer.appendChild(heart);
+    
+    // Add interactivity
+    heart.addEventListener('mouseenter', () => {
+      heart.style.transform = 'scale(1.5)';
+      heart.style.opacity = '1';
+    });
+    
+    heart.addEventListener('mouseleave', () => {
+      heart.style.transform = 'scale(1)';
+      heart.style.opacity = Math.random() * 0.5 + 0.3;
+    });
   }
 
-  // Enhanced input focus effects
-  document.querySelectorAll('input').forEach(input => {
+  // Enhanced input effects
+  document.querySelectorAll('.input-group input').forEach(input => {
     input.addEventListener('focus', () => {
-      input.style.animation = 'inputFocus 0.3s ease-out forwards';
-      input.parentElement.style.transform = 'translateY(-5px)';
+      input.parentElement.querySelector('label').style.color = 'transparent';
+      input.style.boxShadow = '0 0 0 3px rgba(255, 255, 255, 0.3)';
     });
     
     input.addEventListener('blur', () => {
-      input.style.animation = 'none';
-      input.parentElement.style.transform = 'translateY(0)';
+      if (!input.value) {
+        input.parentElement.querySelector('label').style.color = 'rgba(255, 255, 255, 0.7)';
+      }
+      input.style.boxShadow = 'none';
     });
   });
 
@@ -253,39 +267,63 @@ function initLoginPage() {
     // Add loading state
     button.disabled = true;
     button.innerHTML = '<div class="spinner"></div> Loading...';
+    button.style.opacity = '0.8';
+
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
     if (email === "piyaa@example.com" && password === "18party") {
       // Success animation
-      form.classList.add('animate__animated', 'animate__zoomOut');
+      form.style.animation = 'none';
+      form.style.transform = 'translate(-50%, -50%) scale(0.9)';
+      form.style.opacity = '0.8';
       
       // Create celebration effect
-      for (let i = 0; i < 30; i++) {
-        createFloatingElement(document.body, '✨', 24);
-        createFloatingElement(document.body, '❤️', 28);
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          createFloatingElement(document.body, 
+            ['✨', '🎉', '🎁', '🌟', '💖', '🥳'][Math.floor(Math.random() * 6)], 
+            Math.random() * 20 + 20
+          );
+        }, i * 100);
       }
       
-      await new Promise(resolve => setTimeout(resolve, 800));
-      window.location.href = "home.html";
+      // Success message
+      const successMsg = document.createElement('div');
+      successMsg.className = 'custom-alert animate__animated animate__zoomIn';
+      successMsg.innerHTML = `
+        <div class="alert-content">
+          <p>Welcome back, Piyaa! Your magical journey awaits...</p>
+        </div>
+      `;
+      document.body.appendChild(successMsg);
+      
+      // Redirect after delay
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 3000);
     } else {
       // Error animation
       button.disabled = false;
-      button.textContent = 'Enter Wonderland';
+      button.innerHTML = 'Enter Wonderland';
+      button.style.opacity = '1';
+      
       form.classList.add('animate__animated', 'animate__headShake');
       setTimeout(() => {
         form.classList.remove('animate__animated', 'animate__headShake');
       }, 1000);
       
-      // Highlight error fields
-      document.getElementById('email').style.borderColor = '#ff6b6b';
-      document.getElementById('password').style.borderColor = '#ff6b6b';
+      // Highlight error fields with glow effect
+      document.getElementById('email').style.boxShadow = '0 0 10px #ff6b6b';
+      document.getElementById('password').style.boxShadow = '0 0 10px #ff6b6b';
+      
       setTimeout(() => {
-        document.getElementById('email').style.borderColor = 'rgba(216,27,96,0.1)';
-        document.getElementById('password').style.borderColor = 'rgba(216,27,96,0.1)';
+        document.getElementById('email').style.boxShadow = '';
+        document.getElementById('password').style.boxShadow = '';
       }, 1500);
     }
   });
 }
-
 function initHomePage() {
   // Create floating elements
   createFloatingElements('floating-elements', ['🌸', '🌷', '🎀', '✨', '🎂', '💖', '🎈', '🥳']);
