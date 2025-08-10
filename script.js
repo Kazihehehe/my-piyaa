@@ -362,3 +362,13 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+// For 404 errors
+app.use((req, res) => {
+  res.redirect('/');
+});
+
+// For 500 errors
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.redirect('/');
+});
