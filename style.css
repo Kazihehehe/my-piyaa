@@ -719,3 +719,309 @@ button:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
 }
+/* ===== GLOBAL ENHANCEMENTS ===== */
+:root {
+  --primary: #ff6b8b;
+  --secondary: #6b8bff;
+  --accent: #ffcc5c;
+  --dark: #2c3e50;
+  --light: #f8f9fa;
+  --gradient: linear-gradient(135deg, #ff6b8b 0%, #6b8bff 100%);
+}
+
+body {
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== LOGIN PAGE ENHANCEMENTS ===== */
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  animation: float 6s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 10;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-20px); }
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--gradient);
+  z-index: -1;
+  border-radius: 22px;
+  animation: gradientShift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== FOLDED RECTANGLES ===== */
+.folded-section {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.folded-section::before, .folded-section::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  transform: rotate(45deg);
+}
+
+.folded-section::before {
+  top: -15px;
+  right: -15px;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.folded-section::after {
+  bottom: -15px;
+  left: -15px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ===== ENHANCED HEARTS ===== */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: float-up 15s linear infinite;
+  z-index: 1;
+  filter: drop-shadow(0 0 5px rgba(255, 107, 139, 0.7));
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.heart:hover {
+  transform: scale(1.5);
+  opacity: 1;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ===== ENHANCED POPUP ===== */
+.custom-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  max-width: 90%;
+  width: 400px;
+  color: var(--dark);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.custom-alert::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--gradient);
+  z-index: -1;
+  border-radius: 17px;
+  animation: gradientShift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+.alert-content p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.alert-content button {
+  background: var(--gradient);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.alert-content button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== ENHANCED INPUTS ===== */
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.input-group label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -0.5rem;
+  left: 0.8rem;
+  font-size: 0.8rem;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: 0 0.2rem;
+}
+
+/* ===== ENHANCED BUTTONS ===== */
+.btn {
+  background: var(--gradient);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 50%,
+    transparent 75%,
+    rgba(255, 255, 255, 0.1) 75%,
+    rgba(255, 255, 255, 0.1)
+  );
+  background-size: 20px 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover::after {
+  opacity: 1;
+  animation: shine 1s linear infinite;
+}
+
+@keyframes shine {
+  from { background-position: 0 0; }
+  to { background-position: 20px 20px; }
+}
+
+/* ===== SPINNER ===== */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
