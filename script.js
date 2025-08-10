@@ -213,46 +213,75 @@ function initLightbox() {
 // ===== PAGE-SPECIFIC FUNCTIONALITY =====
 
 function initLoginPage() {
-  // Create floating hearts
-  createFloatingElements('hearts-container', ['❤️', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍']);
+  // Create floating hearts with more variety
+  const heartContainer = document.getElementById('hearts-container');
+  const heartShapes = ['❤️', '🧡', '💛', '💚', '💙', '💜', '💝', '💖', '💗', '💘'];
+  
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = heartShapes[Math.floor(Math.random() * heartShapes.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+    heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    heart.style.animationDelay = Math.random() * 5 + 's';
+    heart.style.opacity = Math.random() * 0.5 + 0.3;
+    heartContainer.appendChild(heart);
+  }
 
-  // Input focus animations
+  // Enhanced input focus effects
   document.querySelectorAll('input').forEach(input => {
     input.addEventListener('focus', () => {
-      input.style.transform = 'translateY(-5px)';
-      input.style.boxShadow = '0 6px 25px rgba(216, 27, 96, 0.4)';
+      input.style.animation = 'inputFocus 0.3s ease-out forwards';
+      input.parentElement.style.transform = 'translateY(-5px)';
     });
     
     input.addEventListener('blur', () => {
-      input.style.transform = 'translateY(-2px)';
-      input.style.boxShadow = '0 4px 20px rgba(216, 27, 96, 0.3)';
+      input.style.animation = 'none';
+      input.parentElement.style.transform = 'translateY(0)';
     });
   });
 
-  // Login form handling
+  // Login form handling with enhanced feedback
   document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const form = document.getElementById('login-form');
+    const button = form.querySelector('button');
+
+    // Add loading state
+    button.disabled = true;
+    button.innerHTML = '<div class="spinner"></div> Loading...';
 
     if (email === "piyaa@example.com" && password === "18party") {
-      // Add transition effect before redirect
-      document.querySelector('.login-box').classList.add('animate__animated', 'animate__zoomOut');
+      // Success animation
+      form.classList.add('animate__animated', 'animate__zoomOut');
       
       // Create celebration effect
       for (let i = 0; i < 30; i++) {
-        createFloatingElement(document.body, '❤️', 24);
+        createFloatingElement(document.body, '✨', 24);
+        createFloatingElement(document.body, '❤️', 28);
       }
       
       await new Promise(resolve => setTimeout(resolve, 800));
       window.location.href = "home.html";
     } else {
-      // Shake animation for wrong credentials
-      const form = document.getElementById('login-form');
+      // Error animation
+      button.disabled = false;
+      button.textContent = 'Enter Wonderland';
       form.classList.add('animate__animated', 'animate__headShake');
       setTimeout(() => {
         form.classList.remove('animate__animated', 'animate__headShake');
       }, 1000);
+      
+      // Highlight error fields
+      document.getElementById('email').style.borderColor = '#ff6b6b';
+      document.getElementById('password').style.borderColor = '#ff6b6b';
+      setTimeout(() => {
+        document.getElementById('email').style.borderColor = 'rgba(216,27,96,0.1)';
+        document.getElementById('password').style.borderColor = 'rgba(216,27,96,0.1)';
+      }, 1500);
     }
   });
 }
