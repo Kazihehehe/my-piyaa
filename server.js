@@ -14,7 +14,7 @@ const config = {
    { email: "shreya@bsf.com", password: "bsfforever" },
     { email: "suhana@kazi.com", password: "divalesbo" },
     { email: "soham@kazi.com", password: "gandjalo" },
-    { email: "kazi@owner", password: "rafiza" },
+    { email: "kazi@owner.com", password: "rafiza" },
   ],
   rateLimiting: {
     windowMs: 15 * 60 * 1000, // 15 minutes
