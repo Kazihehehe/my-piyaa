@@ -68,7 +68,45 @@
         opacity: 0;
       }
     }
+/* ===== Enhanced Cry Button Popup ===== */
+.custom-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 300px; /* Optimal width for mobile */
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
 
+.custom-alert p {
+  margin-bottom: 1.5rem;
+  font-family: 'Quicksand', sans-serif;
+  color: #333;
+}
+
+.custom-alert button {
+  background: linear-gradient(135deg, #ff6b8b, #6b8bff);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Ensure popup is above other elements */
+#emoji {
+  position: relative;
+  z-index: 1;
+}
     /* ===== INTRO OVERLAY ===== */
     .intro-overlay {
       position: fixed;
@@ -1093,13 +1131,13 @@
           }
           
           // Custom alert with animation
-          const alertBox = document.createElement('div');
-          alertBox.className = 'custom-alert animate__animated animate__bounceIn';
-          alertBox.innerHTML = `
-            <div class="alert-content">
-              <p>heheheheeheheheheheh...I just love you</p>
-              <button onclick="this.parentElement.parentElement.remove()">OK</button>
-            </div>
+         const alertBox = document.createElement('div');
+    alertBox.className = 'custom-alert animate__animated animate__bounceIn';
+    alertBox.innerHTML = `
+      <div class="alert-content">
+        <p>heheheheeheheheheheh...I just love you</p>
+        <button onclick="this.parentElement.parentElement.remove()">OK</button>
+      </div>
           `;
           document.body.appendChild(alertBox);
         }, 300);
@@ -1196,7 +1234,7 @@
       popup.innerHTML = `
         <div class="alert-content">
           <h3>Happy 17th Birthday, Piyaa! 🎉</h3>
-          <p>May this year be filled with joy, laughter, and unforgettable moments. Explore your special day!</p>
+          <p>May this year you be alive and spend with laughter and joy..enjoy your day!</p>
           <button onclick="this.parentElement.parentElement.remove()">OK</button>
         </div>
       `;
