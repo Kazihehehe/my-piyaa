@@ -289,7 +289,10 @@
     
     <div class="login-container">
         <h1 class="login-title">Enter Piyaa's Secret Garden!!!</h1>
-        <form id="login-form">
+<!-- Previous head and styles remain EXACTLY the same -->
+<!-- Only changing the form and script section -->
+
+<form id="login-form">
     <div class="input-group">
         <input type="email" id="email" name="email" autocomplete="username" placeholder=" " required>
         <label for="email">Email</label>
@@ -300,100 +303,81 @@
     </div>
     <button type="submit" class="login-btn">Enter Wonderland</button>
 </form>
-    </div>
 
-    <script>
-        // Create floating hearts
-        function createHearts() {
-            const heartContainer = document.getElementById('hearts-container');
-            const heartShapes = ['❤️', '🧡', '💛', '💚', '💙', '💜', '💝', '💖', '💗', '💘'];
+<script>
+    // Keep all your heart animation code exactly as is
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const form = document.getElementById('login-form');
+        const button = form.querySelector('button');
+
+        // Show loading state (keep your existing animation)
+        button.disabled = true;
+        button.innerHTML = '<div class="spinner"></div> Loading...';
+        button.style.opacity = '0.8';
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+            });
+
+            const result = await response.json();
             
-            for (let i = 0; i < 30; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.textContent = heartShapes[Math.floor(Math.random() * heartShapes.length)];
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                heart.style.animationDuration = (Math.random() * 15 + 15) + 's';
-                heart.style.animationDelay = Math.random() * 5 + 's';
-                heart.style.filter = `hue-rotate(${Math.random() * 360}deg) brightness(${Math.random() * 0.5 + 0.8})`;
-                heartContainer.appendChild(heart);
-            }
-        }
-
-        // Login form handling
-document.getElementById('login-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const form = document.getElementById('login-form');
-    const button = form.querySelector('button');
-
-    // Show loading state
-    button.disabled = true;
-    button.innerHTML = '<div class="spinner"></div> Loading...';
-    button.style.opacity = '0.8';
-
-    try {
-        const response = await fetch('/login', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value
-    })
-});
-        if (response.ok) {
-            // Success animation
-            form.style.animation = 'none';
-            form.style.transform = 'translate(-50%, -50%) scale(0.9)';
-            form.style.opacity = '0.8';
-            
-            // Celebration effect
-            for (let i = 0; i < 50; i++) {
+            if (result.success) {
+                // SUCCESS - Keep all your existing success animations
+                form.style.animation = 'none';
+                form.style.transform = 'translate(-50%, -50%) scale(0.9)';
+                form.style.opacity = '0.8';
+                
+                // Celebration hearts (unchanged)
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'heart';
+                        heart.textContent = ['✨', '🎉', '🎁', '🌟', '💖', '🥳'][Math.floor(Math.random() * 6)];
+                        heart.style.left = Math.random() * 100 + 'vw';
+                        heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                        heart.style.animationDuration = '5s';
+                        heart.style.animationDelay = '0s';
+                        document.body.appendChild(heart);
+                    }, i * 100);
+                }
+                
+                // Redirect after delay (unchanged)
                 setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.textContent = ['✨', '🎉', '🎁', '🌟', '💖', '🥳'][Math.floor(Math.random() * 6)];
-                    heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
-                    heart.style.animationDuration = '5s';
-                    heart.style.animationDelay = '0s';
-                    document.body.appendChild(heart);
-                }, i * 100);
+                    window.location.href = "home.html";
+                }, 3000);
+            } else {
+                // FAILURE - Trigger your red glow effect
+                throw new Error('Login failed');
             }
+        } catch (error) {
+            // ERROR - Keep all your existing error animations
+            button.disabled = false;
+            button.innerHTML = 'Enter Wonderland';
+            button.style.opacity = '1';
             
-            // Redirect after delay
+            form.classList.add('animate__animated', 'animate__headShake');
             setTimeout(() => {
-                window.location.href = "home.html";
-            }, 3000);
-        } else {
-            throw new Error('Login failed');
+                form.classList.remove('animate__animated', 'animate__headShake');
+            }, 1000);
+            
+            document.getElementById('email').style.boxShadow = '0 0 15px #ff6b6b';
+            document.getElementById('password').style.boxShadow = '0 0 15px #ff6b6b';
+            
+            setTimeout(() => {
+                document.getElementById('email').style.boxShadow = '';
+                document.getElementById('password').style.boxShadow = '';
+            }, 1500);
         }
-    } catch (error) {
-        // Error animation (keeps your red glow effect)
-        button.disabled = false;
-        button.innerHTML = 'Enter Wonderland';
-        button.style.opacity = '1';
-        
-        form.classList.add('animate__animated', 'animate__headShake');
-        setTimeout(() => {
-            form.classList.remove('animate__animated', 'animate__headShake');
-        }, 1000);
-        
-        document.getElementById('email').style.boxShadow = '0 0 15px #ff6b6b';
-        document.getElementById('password').style.boxShadow = '0 0 15px #ff6b6b';
-        
-        setTimeout(() => {
-            document.getElementById('email').style.boxShadow = '';
-            document.getElementById('password').style.boxShadow = '';
-        }, 1500);
-    }
-});
-        // Initialize
-        createHearts();
-    </script>
+    });
+</script>
 </body>
 </html>
