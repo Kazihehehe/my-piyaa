@@ -6,6 +6,7 @@
     <title>Piyaa's Birthday - Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="icon" href="data:,"> <!-- Add to <head> -->
     <style>
         /* ===== BASE STYLES ===== */
         * {
@@ -287,7 +288,7 @@
     <div id="hearts-container"></div>
     
     <div class="login-container">
-        <h1 class="login-title">LOGIN!! Piyaa's Secret Garden</h1>
+        <h1 class="login-title">Enter Piyaa's Secret Garden!!!</h1>
         <form id="login-form">
     <div class="input-group">
         <input type="email" id="email" name="email" autocomplete="username" placeholder=" " required>
@@ -335,13 +336,15 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
     try {
         const response = await fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-        });
-
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+    })
+});
         if (response.ok) {
             // Success animation
             form.style.animation = 'none';
