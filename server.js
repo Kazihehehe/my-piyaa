@@ -3,6 +3,14 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const cors = require('cors');
+
+// Allow your GitHub Pages site to call your Render backend
+app.use(cors({
+    origin: 'https://kazihehehe.github.io',
+    methods: ['POST', 'GET'],
+    credentials: true
+}));
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -37,12 +45,5 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-});
-const response = await fetch('https://my-piyaa.onrender.com/login', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
 });
 
