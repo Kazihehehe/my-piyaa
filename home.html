@@ -6,28 +6,613 @@
   <title>Goodbye 17 🎀 Hello 18, Piyaa!</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@400;700&family=Playfair+Display&family=Quicksand&family=Great+Vibes&family=Indie+Flower&family=Dancing+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== BASE STYLES ===== */
+    :root {
+      --primary: #ff6b8b;
+      --secondary: #6b8bff;
+      --accent: #ffcc5c;
+      --dark: #2c3e50;
+      --light: #f8f9fa;
+      --gradient: linear-gradient(135deg, #ff6b8b 0%, #6b8bff 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* ===== PARTICLE BACKGROUND ===== */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(20px);
+        opacity: 0;
+      }
+    }
+
+    /* ===== INTRO OVERLAY ===== */
+    .intro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      transition: all 1s ease;
+    }
+
+    .intro-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: #f8bbd0;
+      text-align: center;
+      max-width: 80%;
+      line-height: 1.4;
+      text-shadow: 0 0 15px #d81b60;
+      white-space: pre-line;
+    }
+
+    .blinking-cursor {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    section {
+      margin: 5rem 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .birthday-heading {
+      font-family: 'Dancing Script', cursive;
+      color: #ff6b8b;
+      font-size: 3.5rem;
+      font-weight: 700;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      animation: textGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px rgba(255, 107, 139, 0.5); }
+      100% { text-shadow: 0 0 20px rgba(255, 107, 139, 0.8), 0 0 30px rgba(255, 204, 92, 0.6); }
+    }
+
+    .fancy-title {
+      font-family: 'Pacifico', cursive;
+      color: #ffcc5c;
+      font-size: 2.5rem;
+      text-align: center;
+      margin: 1.5rem 0;
+      position: relative;
+      display: inline-block;
+    }
+
+    .fancy-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--gradient);
+      border-radius: 3px;
+    }
+
+    .sub-text {
+      font-family: 'Quicksand', sans-serif;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .love-note {
+      font-family: 'Great Vibes', cursive;
+      color: #ffcc5c;
+      font-size: 1.8rem;
+      line-height: 1.4;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .drama-text {
+      font-family: 'Indie Flower', cursive;
+      color: #a8d5ba;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .caption-bold {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      color: #6b8bff;
+      font-size: 1.3rem;
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .emotion-header {
+      font-family: 'Playfair Display', serif;
+      color: #ff6b8b;
+      font-size: 2rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* ===== LAYOUT COMPONENTS ===== */
+    .main-pic {
+      display: block;
+      margin: 2rem auto;
+      max-width: 300px;
+      width: 90%;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.5s ease;
+    }
+
+    .main-pic:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .countdown {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 1.5rem 0;
+      text-align: center;
+      color: #ffcc5c;
+    }
+
+    .final-surprise, 
+    .game, 
+    .love-letter {
+      margin: 3rem 0;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .surprise-button-container {
+      display: flex;
+      justify-content: center;
+      margin: 3rem 0;
+    }
+
+    /* ===== MEMORY WALL ===== */
+    .birthday-memories {
+      text-align: center;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      max-width: 1200px;
+    }
+
+    .layout-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem auto;
+    }
+
+    .memory-entry {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .memory-pic {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .memory-year {
+      margin: 0.8rem 0;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 500;
+      color: #ffcc5c;
+    }
+
+    .memory-entry:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .memory-entry:hover .memory-pic {
+      transform: scale(1.1);
+    }
+
+ /* ===== FOLDED SECTION ENHANCEMENTS ===== */
+.folded-section {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  margin: 3rem auto;
+  max-width: 800px;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 2; /* Ensure it stays above particles */
+}
+
+.folded-section h2 {
+  font-family: 'Playfair Display', serif;
+  color: #ffcc5c;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.trait-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  padding: 1.8rem 1.2rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.trait-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.trait-icon {
+  font-size: 2.8rem;
+  margin-bottom: 1.2rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.trait-card:hover .trait-icon {
+  transform: scale(1.3) rotate(5deg);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+
+.trait-card h3 {
+  margin: 0.8rem 0;
+  color: white;
+  font-size: 1.3rem;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+
+.trait-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  font-family: 'Quicksand', sans-serif;
+  line-height: 1.5;
+}
+
+    /* ===== BUTTONS ===== */
+    button {
+      padding: 0.75rem 1.5rem;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .audio-button {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.875rem 1.75rem;
+      font-size: 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .audio-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
+    }
+
+    .cry-button {
+      background: linear-gradient(135deg, #e91e63, #ff6b8b);
+      animation: pulse 2s infinite;
+    }
+
+    .surprise-button {
+      background: linear-gradient(135deg, #ffcc5c, #ff9a44);
+      font-family: 'Pacifico', cursive;
+      font-size: 1.2rem;
+      padding: 1rem 2rem;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 139, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 107, 139, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 139, 0); }
+    }
+
+    /* ===== VIDEO ===== */
+    .video-frame {
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      margin: 1rem auto;
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    [data-scroll] {
+      opacity: 0;
+      transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    [data-scroll="fadeIn"] {
+      transform: translateY(50px);
+    }
+
+    [data-scroll="fadeInUp"] {
+      transform: translateY(50px);
+    }
+
+    [data-scroll="fadeInLeft"] {
+      transform: translateX(-50px);
+    }
+
+    [data-scroll="fadeInRight"] {
+      transform: translateX(50px);
+    }
+
+    [data-scroll].visible {
+      opacity: 1;
+      transform: translate(0);
+    }
+
+    /* ===== FLOATING ELEMENTS ===== */
+    .floating-elements-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .floating-element {
+      position: absolute;
+      font-size: 24px;
+      animation: float 15s linear infinite;
+      z-index: 1;
+      filter: drop-shadow(0 0 8px rgba(255, 105, 140, 0.7));
+      opacity: 0;
+      transform: translateY(100vh);
+      will-change: transform, opacity;
+      user-select: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* ===== MUSIC PLAYER ===== */
+    .music-fixed-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .birthday-heading {
+        font-size: 2.5rem;
+      }
+      
+      .fancy-title {
+        font-size: 2rem;
+      }
+      
+      .layout-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+      
+      .memory-pic {
+        height: 150px;
+      }
+      
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .video-frame {
+        height: 250px;
+      }
+      
+      .intro-text {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .birthday-heading {
+        font-size: 2rem;
+      }
+      
+      .fancy-title {
+        font-size: 1.5rem;
+      }
+      
+      .layout-container {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+      
+      .memory-pic {
+        height: 120px;
+      }
+      
+      .intro-text {
+        font-size: 1.5rem;
+      }
+      
+      .love-note {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- Particle Background -->
+  <div class="particles" id="particles"></div>
+  
   <!-- Intro overlay - will be removed by JavaScript -->
   <div class="intro-overlay">
     <div class="intro-text"></div>
   </div>
   
-  <div data-scroll="fadeIn">
-    <div class="music-fixed-container animate__animated animate__fadeIn">
-      <button id="audio-toggle" class="audio-button animate-heartbeat">Play Music</button>
-    </div>
+  <!-- Floating Elements -->
+  <div class="floating-elements-container" id="floating-elements"></div>
 
-    <div class="floating-elements-container" id="floating-elements"></div>
+  <!-- Music Player -->
+  <div class="music-fixed-container">
+    <button id="audio-toggle" class="audio-button">Play Music</button>
+  </div>
 
-    <!-- Birthday Memory Wall -->
-    <div class="birthday-memories animate__animated animate__fadeIn delay-1">
-      <h2 class="fancy-title animate__animated animate__pulse animate__infinite">📸 Birthday Memory Wall</h2>
-      <p class="sub-text">Each year, we'll add a memory and mark the magic with love 🕰️</p>
+  <!-- Main Content -->
+  <div class="container">
+    <div data-scroll="fadeIn">
+      <!-- Birthday Memory Wall -->
+      <div class="birthday-memories">
+        <h2 class="fancy-title">📸 Birthday Memory Wall</h2>
+        <p class="sub-text">Each year, we'll add a memory and mark the magic with love 🕰️</p>
 
-      <div class="layout-container">
-        <div class="memory-entry">
+        <div class="layout-container">
+             <div class="memory-entry">
       <img src="img1-2009.jpg" alt="Memory 1 2023" class="memory-pic"/>
       <p class="memory-year">2009</p>
     </div>
@@ -272,80 +857,434 @@
       <img src="img29-2025.JPG" alt="Memory 1 2023" class="memory-pic"/>
       <p class="memory-year">2025</p>
     </div>
+        </div>
       </div>
-    </div>
 
-    <p class="caption-bold text-center animate__animated animate__fadeIn delay-2">From this moment on, you are 17 — and this page will forever count down to your magical birthday on July 27th 🎂🌷</p>
+      <p class="caption-bold">From this moment on, you are 17 — and this page will forever count down to your magical birthday on July 27th 🎂🌷</p>
 
-    <h1 class="birthday-heading animate__animated animate__bounceIn delay-3">Goodbye 17 🎀 Hello 18, Piyaa!</h1>
+      <h1 class="birthday-heading">Goodbye 17 🎀 Hello 18, Piyaa!</h1>
 
-    <img src="Birthday-Girl.jpg" alt="Birthday Girl" class="main-pic animate__animated animate__zoomIn delay-4">
+      <img src="Birthday-Girl.jpg" alt="Birthday Girl" class="main-pic">
+      
+      <div class="countdown">
+        ⏳ Countdown to 18: <div id="timer">--:--:--</div>
+      </div>
+      
+      <section class="folded-section" data-scroll="fadeIn">
+        <h2>About You, Queen 👑</h2>
+        <div class="content-grid">
+          <div class="trait-card">
+            <div class="trait-icon">💖</div>
+            <h3>Gossip Diva</h3>
+            <p>Per ab tere sath karne mmein maza ata hai...I love listining you 😭</p>
+          </div>
+          <div class="trait-card">
+            <div class="trait-icon">🌟</div>
+            <h3>Saurophobe</h3>
+            <p>How you shout!!chipkali fears you now🦎</p>
+          </div>
+          <div class="trait-card">
+            <div class="trait-icon">🎨</div>
+            <h3>Bhukkad didi</h3>
+            <p>I want to watch you in tond ever fr</p>
+          </div>
+          <div class="trait-card">
+            <div class="trait-icon">🦸‍♀️</div>
+            <h3>Bhoolu baba</h3>
+            <p>Bluetooth connected!!👍 Virus injected successfully</p>
+          </div>
+        </div>
+         
+      
+            <div class="trait-card">
+            <div class="trait-icon">🦸‍♀️</div>
+            <h3>Nakhre Baaz</h3>
+            <p>Nakhre bohot hai apki...per kya kare jhelna padega😀</p>
+          </div>
+        </div>
+    <div class="trait-card">
+            <div class="trait-icon">🦸‍♀️</div>
+            <h3>Perfect girl</h3>
+            <p>No space for all compliments....you are perfect fromm every angle</p>
+          </div>
+        </div>
+      </section>
     
-    <div class="countdown animate__animated animate__fadeIn delay-5">
-      ⏳ Countdown to 18: <div id="timer">--:--:--</div>
-    </div>
-    
-    <section class="folded-section">
-  <h2>About You, Queen 👑</h2>
-  <div class="content-grid">
-    <div class="trait-card">
-      <div class="trait-icon">💖</div>
-      <h3>Kind Heart</h3>
-      <p>Your compassion touches everyone around you</p>
-    </div>
-    <div class="trait-card">
-      <div class="trait-icon">🌟</div>
-      <h3>Bright Spirit</h3>
-      <p>You light up every room you enter</p>
-    </div>
-    <div class="trait-card">
-      <div class="trait-icon">🎨</div>
-      <h3>Creative Soul</h3>
-      <p>Your imagination knows no bounds</p>
-    </div>
-    <div class="trait-card">
-      <div class="trait-icon">🦸‍♀️</div>
-      <h3>Inner Strength</h3>
-      <p>You overcome every challenge with grace</p>
-    </div>
-  </div>
-</section>
+      <div class="game">
+        <h3 class="caption-bold">OUR PIC TOGETHER</h3>
+        <img src="crying_emoji.png" id="emoji" alt="OUR PIC TOGETHER" class="animate__animated animate__shakeX animate__infinite">
+        <p class="drama-text">Saram nahi atii!!! Saram nahi ati jhakte hueee??? Nahi hai humare eksath koi bhi pic!!!</p>
+        <button class="cry-button" onclick="catchEmoji()">Cry!!</button>
+      </div>
 
-    <div class="game animate__animated animate__fadeIn">
-      <h3 class="caption-bold animate__animated animate__pulse animate__infinite">OUR PIC TOGETHER</h3>
-      <img src="crying_emoji.png" id="emoji" alt="OUR PIC TOGETHER" class="animate__animated animate__shakeX animate__infinite">
-      <p class="drama-text">Saram nahi atii!!! Saram nahi ati jhakte hueee??? Nahi hai humare eksath koi bhi pic!!!</p>
-      <button class="cry-button animate__animated animate__pulse animate__infinite" onclick="catchEmoji()">Cry!!</button>
+      <p class="drama-text text-center">🦎 Fare !!! At last you hate me right?? Saram karle and bhag ja!! 😜</p>
+
+      <div class="love-letter">
+        <h2 class="love-note">Seventeen's Love Note...</h2>
+        <p class="sub-text">"Hey my cutie pie/ mommy /piya /rafiza /puchku/rafija...at last your 17..just wishing you a happy happy birthday...just wish you overcome from the fear of lizard this year...and fall for me too😭..(no CHIIII please)....yk I really don't know of the gift for you but also confused of the bond we hold..so it feels like you're the gift I got....you're literally too much overwhelming and comforting....it feels home in you...never felt hesitate to you... you're someone gentelman and perfect ik...ik it's been 3 yrs together but never feels so, cuz I was never with you...yelling at you, slang in chat...ik what I did back...and ik you still fear of repeating those days with me...leave!!!...so my perfect girl as the 16th end with trouble...I wish 17th will be a more troublesome, more worries, headache...dw you will mange...you will smile...and at the end, 1yr to the end again...so enjoy every moment you have...idk how much I'm gonna live with you......but always you have been my comfort zone....I can never hate you no matter what you do...wish you achieve all you want...all the love...all the happiness...and a prosperous life...you lit my sky, when it was dark cuz its only you in there....so never be like all are...be yourself, cuz you are more beutiful and gorgious how you are...just believe "YOU CAN DO IT, FUCK PPLS"💖</p>
+      </div>
+
+      <div class="final-surprise">
+        <h2 class="emotion-header">Your Final 17-Year Moment</h2>
+        <video class="video-frame" controls>
+          <source src="video1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="love-note">Tap to unwrap your future 🎁✨ Because Seventeen didn't deserve you... and Eighteen's just lucky to meet you 🌟</p>
+      </div>
+
+      <div class="surprise-button-container">
+        <button id="surpriseButton" class="surprise-button">🎁 Surprise Me!</button>
+      </div>
+
+      <p class="love-glow">I'll be always there for you, no matter the time ,no matter the situation, no matter how, cuz you complete me!! 💖</p>
+
+      <p class="text-center" style="font-style:italic; color:#ffcc5c; margin-top: 30px;">
+        This page is eternal. It will always celebrate your countdown to July 27th, no matter the year. 💫
+      </p>
     </div>
-
-    <p class="drama-text text-center animate__animated animate__fadeIn">🦎 Fare !!! At last you hate me right?? Saram karle and bhag ja!! 😜</p>
-
-    <div class="love-letter animate__animated animate__fadeIn">
-      <h2 class="love-note animate__animated animate__pulse animate__infinite">Seventeen's Love Note...</h2>
-      <p class="sub-text">"Hey my cutie pie/ mommy /piya /rafiza /puchku/rafija...at last your 17..just wishing you a happy happy birthday...just wish you overcome from the fear of lizard this year...and fall for me too😭..(no cring)....yk I really don't know of the gift for you but also confused of the bond we hold..so it feels like you're the gift I got....you're literally too much overwhelming and comforting....it feels home in you...never felt hesitate to you... you're someone gentelman and perfect ik...ik it's been 3 yrs together but never feels so cuz I was never with you...yelling at you, slang in chat...ik what I did back...and ik you still fear of repeating those days again with me...leave!!!...so my perfect girl as the 16th end with trouble...I wish 17th will be a more troublesome, more worries, headache...dw you will mange...you will smile...and at the end, 1yr to the end again...so enjoy every moment you have...idk how much I'm gonna live with you......but always you have been my comfort zone....I can never hate you no matter what you do...wish you achieve all you want...all the love...all the happiness...and a prosperous life...you lit my sky, when it's dark cuz its only you in there....so never be like all are...be yourself...just believe "YOU CAN DO IT, FUCK PPLS"💖</p>
-    </div>
-
-    <div class="final-surprise animate__animated animate__fadeIn">
-      <h2 class="emotion-header animate__animated animate__pulse animate__infinite">Your Final 17-Year Moment</h2>
-      <video class="video-frame animate__animated animate__zoomIn" controls>
-        <source src="video1.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <p class="love-note animate__animated animate__pulse animate__infinite">Tap to unwrap your future 🎁✨ Because Seventeen didn't deserve you... and Eighteen's just lucky to meet you 🌟</p>
-    </div>
-
-    <div class="surprise-button-container slide-in-bottom animate__animated animate__fadeIn">
-      <button id="surpriseButton" class="surprise-button animate__animated animate__pulse animate__infinite">🎁 Surprise Me!</button>
-    </div>
-
-    <p class="love-glow animate__animated animate__fadeIn">I'll be always there for you, no matter the time ,no matter the situation, no matter how, cuz you complete me!! 💖</p>
-
-    <p class="animate__animated animate__fadeIn" style="text-align:center; font-style:italic; color:#6a1b9a; margin-top: 30px;">
-      This page is eternal. It will always celebrate your countdown to July 27th, no matter the year. 💫
-    </p>
   </div>
 
   <audio id="birthday-audio" src="birthday_song.mp3" loop></audio>
-  <script src="script.js"></script>
+  <script>
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      createFloatingElements();
+      initScrollAnimations();
+      initAudioPlayer();
+      initCountdown();
+      initSurpriseButton();
+      initCryGame();
+      initTypingEffect();
+    });
+
+    // ===== PARTICLE BACKGROUND =====
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 100;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.top = Math.random() * 100 + 'vh';
+        particle.style.width = (Math.random() * 3 + 1) + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+        particle.style.animationDelay = (Math.random() * 5) + 's';
+        particle.style.opacity = Math.random() * 0.5 + 0.1;
+        container.appendChild(particle);
+      }
+    }
+
+    // ===== FLOATING ELEMENTS =====
+    function createFloatingElements() {
+      const container = document.getElementById('floating-elements');
+      const elements = ['🌸', '🌷', '🎀', '✨', '🎂', '💖', '🎈', '🥳', '🍰', '🎊', '🎇', '💫'];
+      
+      for (let i = 0; i < 30; i++) {
+        const element = document.createElement('div');
+        element.className = 'floating-element';
+        element.textContent = elements[Math.floor(Math.random() * elements.length)];
+        element.style.left = Math.random() * 100 + 'vw';
+        element.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        element.style.animationDuration = (Math.random() * 15 + 15) + 's';
+        element.style.animationDelay = Math.random() * 5 + 's';
+        element.style.filter = `hue-rotate(${Math.random() * 360}deg) brightness(${Math.random() * 0.5 + 0.8})`;
+        container.appendChild(element);
+      }
+    }
+
+    // ===== SCROLL ANIMATIONS =====
+    function initScrollAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('[data-scroll]').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    // ===== AUDIO PLAYER =====
+    function initAudioPlayer() {
+      const audio = document.getElementById('birthday-audio');
+      const toggleButton = document.getElementById('audio-toggle');
+      
+      if (toggleButton && audio) {
+        toggleButton.addEventListener('click', () => {
+          if (audio.paused) {
+            audio.play().catch(e => console.log("Audio play failed:", e));
+            toggleButton.textContent = "Pause Music";
+          } else {
+            audio.pause();
+            toggleButton.textContent = "Play Music";
+          }
+        });
+      }
+    }
+
+    // ===== COUNTDOWN TIMER =====
+    function initCountdown() {
+      const timerElement = document.getElementById('timer');
+      if (!timerElement) return;
+
+      function getNextBirthday() {
+        const now = new Date();
+        const thisYear = now.getFullYear();
+        let birthday = new Date(thisYear, 6, 27); // July = 6 (0-based)
+        if (now > birthday) {
+          birthday = new Date(thisYear + 1, 6, 27);
+        }
+        return birthday;
+      }
+
+      function updateCountdown() {
+        const now = new Date();
+        const birthday = getNextBirthday();
+        const diff = birthday - now;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        timerElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        
+        // Special effect when close to birthday
+        if (days <= 7) {
+          timerElement.style.animation = 'pulse 1s infinite alternate';
+          timerElement.style.color = '#ff6b6b';
+        }
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    // ===== CRY GAME =====
+    function initCryGame() {
+      window.catchEmoji = function() {
+        const emoji = document.getElementById("emoji");
+        if (!emoji) return;
+        
+        emoji.style.transform = "scale(1.5)";
+        emoji.style.transition = "transform 0.3s ease";
+        setTimeout(() => {
+          emoji.style.transform = "scale(1)";
+          
+          // Create floating hearts effect
+          const container = document.getElementById('floating-elements');
+          for (let i = 0; i < 10; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-element';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = '30px';
+            heart.style.animationDuration = '5s';
+            heart.style.animationDelay = '0s';
+            container.appendChild(heart);
+          }
+          
+          // Custom alert with animation
+          const alertBox = document.createElement('div');
+          alertBox.className = 'custom-alert animate__animated animate__bounceIn';
+          alertBox.innerHTML = `
+            <div class="alert-content">
+              <p>heheheheeheheheheheh...I just love you</p>
+              <button onclick="this.parentElement.parentElement.remove()">OK</button>
+            </div>
+          `;
+          document.body.appendChild(alertBox);
+        }, 300);
+      };
+    }
+
+    // ===== SURPRISE BUTTON =====
+    function initSurpriseButton() {
+      const surpriseButton = document.getElementById("surpriseButton");
+      if (surpriseButton) {
+        surpriseButton.addEventListener("click", () => {
+          // Create confetti effect
+          const container = document.getElementById('floating-elements');
+          for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+              const element = document.createElement('div');
+              element.className = 'floating-element';
+              element.textContent = ['✨', '🎉', '🎁', '🌟'][Math.floor(Math.random() * 4)];
+              element.style.left = Math.random() * 100 + 'vw';
+              element.style.fontSize = (Math.random() * 20 + 20) + 'px';
+              element.style.animationDuration = '5s';
+              element.style.animationDelay = '0s';
+              container.appendChild(element);
+            }, i * 100);
+          }
+          
+          // Custom alert
+          const alertBox = document.createElement('div');
+          alertBox.className = 'custom-alert animate__animated animate__zoomIn';
+          alertBox.innerHTML = `
+            <div class="alert-content">
+              <p>🌟 SURPRISE: You're officially unforgettable. Welcome to the journey through 17, Piyaa!</p>
+              <button onclick="this.parentElement.parentElement.remove()">OK</button>
+            </div>
+          `;
+          document.body.appendChild(alertBox);
+          
+          // Change background
+          document.body.style.background = "linear-gradient(to right, #ffe0f0, #e0f7fa)";
+        });
+      }
+    }
+
+    // ===== TYPING EFFECT =====
+    function initTypingEffect() {
+      const introText = document.querySelector('.intro-text');
+      if (!introText) return;
+
+      const text = "Once upon a time, a boy named Kazi created this for your 17th birthday\nTo make you smile today and remember him in your golden years...";
+      let i = 0;
+      let lineBreak = false;
+      
+      function type() {
+        if (i < text.length) {
+          // Handle line breaks
+          if (text.charAt(i) === '\n') {
+            introText.innerHTML = introText.innerHTML + '<br><span class="blinking-cursor">|</span>';
+            lineBreak = true;
+          } else {
+            if (lineBreak) {
+              introText.innerHTML = text.substring(0, i+1) + '<span class="blinking-cursor">|</span>';
+              lineBreak = false;
+            } else {
+              introText.innerHTML = text.substring(0, i+1) + '<span class="blinking-cursor">|</span>';
+            }
+          }
+          i++;
+          setTimeout(type, 50); // Typing speed
+        } else {
+          introText.innerHTML = text;
+          // Remove intro overlay after 4 seconds
+          setTimeout(() => {
+            const introOverlay = document.querySelector('.intro-overlay');
+            if (introOverlay) {
+              introOverlay.style.opacity = '0';
+              introOverlay.style.transform = 'scale(1.1)';
+              introOverlay.style.backdropFilter = 'blur(0px)';
+              setTimeout(() => introOverlay.remove(), 1000);
+              
+              // Show welcome popup
+              showWelcomePopup();
+            }
+          }, 4000);
+        }
+      }
+      
+      type();
+    }
+
+    // ===== WELCOME POPUP =====
+    function showWelcomePopup() {
+      const popup = document.createElement('div');
+      popup.className = 'custom-alert animate__animated animate__zoomIn';
+      popup.innerHTML = `
+        <div class="alert-content">
+          <h3>Happy 17th Birthday, Piyaa! 🎉</h3>
+          <p>May this year be filled with joy, laughter, and unforgettable moments. Explore your special day!</p>
+          <button onclick="this.parentElement.parentElement.remove()">OK</button>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      
+      // Auto-remove after 10 seconds
+      setTimeout(() => {
+        popup.classList.add('animate__animated', 'animate__zoomOut');
+        setTimeout(() => popup.remove(), 500);
+      }, 10000);
+    }
+
+    // ===== CUSTOM ALERT STYLES =====
+    const style = document.createElement('style');
+    style.textContent = `
+      .custom-alert {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        max-width: 90%;
+        width: 400px;
+        color: #2c3e50;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      
+      .custom-alert::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(135deg, #ff6b8b, #6b8bff);
+        z-index: -1;
+        border-radius: 17px;
+        animation: gradientShift 8s ease infinite;
+        background-size: 200% 200%;
+      }
+      
+      .alert-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .alert-content h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #ff6b8b;
+      }
+      
+      .alert-content p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+      
+      .alert-content button {
+        background: linear-gradient(135deg, #ff6b8b, #6b8bff);
+        color: white;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .alert-content button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
