@@ -29,22 +29,20 @@ const validCredentials = [
 ];
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(express.json()); // Parse JSON bodies
 app.use(express.static(__dirname));
 
 // Login route with rate limiting
 app.post('/login', limiter, (req, res) => {
   const { email, password } = req.body;
   
-  const isValid = validCredentials.some(cred => 
-    cred.email === email && cred.password === password
-  );
-
-  if (isValid) {
-    return res.sendStatus(200); // Success status
-  } else {
-    return res.sendStatus(401); // Unauthorized status
-  }
+   if (email === process.env.ADMIN_EMAIL && 
+        password === process.env.ADMIN_PASSWORD) {
+        return res.status(200).send('OK');
+    }
+    
+    return res.status(401).send('Invalid credentials');
 });
 
 // Serve HTML files
