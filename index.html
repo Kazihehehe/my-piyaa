@@ -334,7 +334,6 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     button.style.opacity = '0.8';
 
     try {
-        // Send login request to server
         const response = await fetch('/login', {
             method: 'POST',
             headers: {
@@ -349,7 +348,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
             form.style.transform = 'translate(-50%, -50%) scale(0.9)';
             form.style.opacity = '0.8';
             
-            // Create celebration effect
+            // Celebration effect
             for (let i = 0; i < 50; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
@@ -365,13 +364,13 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
             
             // Redirect after delay
             setTimeout(() => {
-                window.location.href = "/home.html";
+                window.location.href = "home.html";
             }, 3000);
         } else {
             throw new Error('Login failed');
         }
     } catch (error) {
-        // Error handling
+        // Error animation (keeps your red glow effect)
         button.disabled = false;
         button.innerHTML = 'Enter Wonderland';
         button.style.opacity = '1';
@@ -388,10 +387,8 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
             document.getElementById('email').style.boxShadow = '';
             document.getElementById('password').style.boxShadow = '';
         }, 1500);
-
-            }
-        });
-
+    }
+});
         // Initialize
         createHearts();
     </script>
