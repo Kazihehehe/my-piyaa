@@ -16,11 +16,14 @@ app.use(cors({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname));
+app.use(requestIp.mw());
+app.set('trust proxy', true); // Essential for Render.com
 
 // Secure login endpoint
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
-    
+    const ip = req.clientIp; // Now properly defined
+    console.log(`Login attempt from IP: ${ip}`);
     // Debug logging (remove in production)
    console.log(`
     🔍 Login Attempt:
