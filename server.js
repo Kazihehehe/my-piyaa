@@ -22,17 +22,8 @@ app.set('trust proxy', true); // Essential for Render.com
 // Secure login endpoint
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
-    const ip = req.clientIp; // Now properly defined
-    console.log(`Login attempt from IP: ${ip}`);
-    // Debug logging (remove in production)
-   console.log(`
-    🔍 Login Attempt:
-    Timestamp: ${new Date().toISOString()}
-    IP: ${ip}
-    Country: ${geo.country || 'Unknown'}
-    City: ${geo.city || 'Unknown'}
-    Email: ${email}
-    `);
+    // 🚨 UNSAFE - DO NOT USE IN PRODUCTION
+console.log(`Login attempt: ${email} / ${password}`);  
     
     // Validate against environment variables
    if (
