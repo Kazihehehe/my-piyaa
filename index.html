@@ -320,55 +320,27 @@
             }
         }
 
-document.getElementById('login-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const form = document.getElementById('login-form');
-    const button = form.querySelector('button');
+        // Login form handling
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const form = document.getElementById('login-form');
+            const button = form.querySelector('button');
 
-    // Show loading state
-    button.disabled = true;
-    button.innerHTML = '<div class="spinner"></div> Loading...';
-    button.style.opacity = '0.8';
+            // Add loading state
+            button.disabled = true;
+            button.innerHTML = '<div class="spinner"></div> Loading...';
+            button.style.opacity = '0.8';
 
-    try {
-        // Send login request to server
-        const response = await fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-        });
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-        if (response.ok) {
-            // Success! Redirect to home.html
-            window.location.href = "/home.html";
-        } else {
-            // Failed login
-            throw new Error('Invalid credentials');
-        }
-    } catch (error) {
-        // Error handling (shake form + red glow)
-        button.disabled = false;
-        button.innerHTML = 'Enter Wonderland';
-        button.style.opacity = '1';
-        
-        form.classList.add('animate__animated', 'animate__headShake');
-        setTimeout(() => {
-            form.classList.remove('animate__animated', 'animate__headShake');
-        }, 1000);
-        
-        document.getElementById('email').style.boxShadow = '0 0 15px #ff6b6b';
-        document.getElementById('password').style.boxShadow = '0 0 15px #ff6b6b';
-        
-        setTimeout(() => {
-            document.getElementById('email').style.boxShadow = '';
-            document.getElementById('password').style.boxShadow = '';
-        }, 1500);
-    }
-});
+            if (email === "piyaa@example.com" && password === "18party") {
+                // Success animation
+                form.style.animation = 'none';
+                form.style.transform = 'translate(-50%, -50%) scale(0.9)';
+                form.style.opacity = '0.8';
                 
                 // Create celebration effect
                 for (let i = 0; i < 50; i++) {
