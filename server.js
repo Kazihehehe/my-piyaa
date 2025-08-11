@@ -38,3 +38,11 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+const response = await fetch('https://my-piyaa.onrender.com/login', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+});
+
