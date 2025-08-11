@@ -22,7 +22,7 @@ app.post('/login', (req, res) => {
     const { email, password } = req.body;
     
     // Debug logging (remove in production)
-    console.log('Login attempt:', { email });
+   console.log('RAW LOGIN ATTEMPT:', { email, password });
     
     // Validate against environment variables
    if (
