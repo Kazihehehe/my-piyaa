@@ -9,10 +9,11 @@
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "express": "^4.18.2",
-    "path": "^0.12.7"
-  },
+ "dependencies": {
+  "dotenv": "^16.0.3",
+  "express-rate-limit": "^6.7.0",
+  "helmet": "^7.0.0"
+},
   "engines": {
     "node": "18.x"
   },
