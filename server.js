@@ -1,50 +1,56 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-const cors = require('cors');
 
-// Allow your GitHub Pages site to call your Render backend
+// ===== CORS CONFIGURATION =====
 app.use(cors({
-    origin: 'https://kazihehehe.github.io',
-    methods: ['POST', 'GET'],
+    origin: 'https://kazihehehe.github.io', // Your GitHub Pages URL
+    methods: ['GET', 'POST'],
     credentials: true
 }));
 
-// Middleware
+// ===== MIDDLEWARE =====
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname));
-app.use(requestIp.mw());
-app.set('trust proxy', true); // Essential for Render.com
 
-// Secure login endpoint
+// ===== LOGIN ROUTE =====
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
     // 🚨 UNSAFE - DO NOT USE IN PRODUCTION
-console.log(`Login attempt: ${email} / ${password}`);  
-    
-    // Validate against environment variables
-   if (
-    (email === process.env.email1 && password === process.env.pass1) ||
-    (email === process.env.email2 && password === process.env.pass2) ||
-    (email === process.env.email3 && password === process.env.pass3) ||
-    (email === process.env.email4 && password === process.env.pass4) ||
-    (email === process.env.email5 && password === process.env.pass5)
-) {
-        return res.status(200).json({ success: true });
+    console.log(`Login attempt: ${email} / ${password}`);  
+
+    // Build credentials array from env variables
+    const credentials = [
+        { email: process.env.email1, password: process.env.pass1 },
+        { email: process.env.email2, password: process.env.pass2 },
+        { email: process.env.email3, password: process.env.pass3 },
+        { email: process.env.email4, password: process.env.pass4 },
+        { email: process.env.email5, password: process.env.pass5 }
+    ];
+
+    // Check if the provided email/password matches any pair
+    const isValid = credentials.some(
+        cred => email === cred.email && password === cred.password
+    );
+
+    if (isValid) {
+        return res.status(200).json({ success: true, message: 'Login successful' });
+    } else {
+        return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
-    
-    return res.status(401).json({ success: false });
 });
 
-// Serve static files
+// ===== FALLBACK TO INDEX.HTML =====
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// ===== START SERVER =====
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`✅ Server running on port ${PORT}`);
 });
-
