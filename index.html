@@ -388,25 +388,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
             document.getElementById('email').style.boxShadow = '';
             document.getElementById('password').style.boxShadow = '';
         }, 1500);
-        } else {
-                // Error animation
-                button.disabled = false;
-                button.innerHTML = 'Enter Wonderland';
-                button.style.opacity = '1';
-                
-                form.classList.add('animate__animated', 'animate__headShake');
-                setTimeout(() => {
-                    form.classList.remove('animate__animated', 'animate__headShake');
-                }, 1000);
-                
-                // Highlight error fields with glow effect
-                document.getElementById('email').style.boxShadow = '0 0 15px #ff6b6b';
-                document.getElementById('password').style.boxShadow = '0 0 15px #ff6b6b';
-                
-                setTimeout(() => {
-                    document.getElementById('email').style.boxShadow = '';
-                    document.getElementById('password').style.boxShadow = '';
-                }, 1500);
+
             }
         });
 
