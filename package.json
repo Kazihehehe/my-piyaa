@@ -19,7 +19,3 @@
   },
   "license": "MIT"
 }
-app.post('/login', (req, res) => {
-  console.log('Received login attempt:', req.body); // Debug log
-  // ... rest of your logic
-});
