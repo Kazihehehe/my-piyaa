@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const helmet = require('helmet'); // Security middleware
+
 const rateLimit = require('express-rate-limit'); // Brute force protection
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,7 +23,7 @@ const config = {
 };
 
 // Security middleware
-app.use(helmet());
+
 app.disable('x-powered-by');
 
 // Rate limiting
