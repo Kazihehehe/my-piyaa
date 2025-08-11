@@ -1,43 +1,50 @@
-
+require('dotenv').config(); // Add this at the top
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 // Create server
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Multiple credentials - MAKE SURE THIS IS UPDATED
+// Security middleware
+app.use(helmet());
+
+// Rate limiting for login
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // limit each IP to 5 login attempts
+  message: 'Too many login attempts, please try again later'
+});
+
+// Credentials from environment variables
 const validCredentials = [
-  { email: "rafiza@owner.com", password: "mommy" },
-   { email: "shreya@bsf.com", password: "bsfforever" },
-    { email: "suhana@kazi.com", password: "divalesbo" },
-    { email: "soham@kazi.com", password: "gandjalo" },
-    { email: "kazi@owner.com", password: "rafiza" },
+  { email: process.env.ADMIN_EMAIL_1, password: process.env.ADMIN_PASSWORD_1 },
+  { email: process.env.ADMIN_EMAIL_2, password: process.env.ADMIN_PASSWORD_2 },
+  { email: process.env.ADMIN_EMAIL_3, password: process.env.ADMIN_PASSWORD_3 },
+  { email: process.env.ADMIN_EMAIL_4, password: process.env.ADMIN_PASSWORD_4 },
+  { email: process.env.ADMIN_EMAIL_5, password: process.env.ADMIN_PASSWORD_5 }
 ];
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
-// Login route with debugging
-app.post('/login', (req, res) => {
+// Login route with rate limiting
+app.post('/login', limiter, (req, res) => {
   const { email, password } = req.body;
-  
-  console.log('Login attempt with:', { email, password }); // Debug log
-  console.log('Valid credentials:', validCredentials); // Debug log
   
   const isValid = validCredentials.some(cred => 
     cred.email === email && cred.password === password
   );
 
   if (isValid) {
-    console.log('Successful login for:', email); // Debug log
-    return res.redirect('/home.html');
+    return res.sendStatus(200); // Success status
+  } else {
+    return res.sendStatus(401); // Unauthorized status
   }
-  
-  console.log('Failed login attempt for:', email); // Debug log
-  return res.status(401).send('Invalid credentials');
 });
 
 // Serve HTML files
@@ -53,5 +60,5 @@ app.get('*', (req, res) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  console.log('Configured credentials:', validCredentials); // Show credentials on startup
+  console.log('Login endpoints are secured');
 });
