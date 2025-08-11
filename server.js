@@ -17,11 +17,11 @@ app.post('/login', (req, res) => {
     console.log('Login attempt:', { email });
     
     // Validate against environment variables
-    if (email === process.env.ADMIN_EMAIL_1 && password === process.env.ADMIN_PASSWORD_1) 
-    if (email === process.env.ADMIN_EMAIL_2 && password === process.env.ADMIN_PASSWORD_2)
-    if (email === process.env.ADMIN_EMAIL_3 && password === process.env.ADMIN_PASSWORD_3)
-    if (email === process.env.ADMIN_EMAIL_4 && password === process.env.ADMIN_PASSWORD_4)
-    if (email === process.env.ADMIN_EMAIL_5 && password === process.env.ADMIN_PASSWORD_4)
+    if (email === process.env.email1 && password === process.env.pass1) 
+    if (email === process.env.email2 && password === process.env.pass2)
+    if (email === process.env.email3 && password === process.env.pass3)
+    if (email === process.env.email4 && password === process.env.pass4)
+    if (email === process.env.email5 && password === process.env.pass4)
     {
         return res.status(200).json({ success: true });
     }
