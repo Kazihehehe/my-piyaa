@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname), {
       res.setHeader('Cache-Control', 'no-cache');
     }
   }
-});
+}));
 
 // Enhanced login endpoint
 app.post('/api/login', (req, res) => {
