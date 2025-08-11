@@ -22,7 +22,14 @@ app.post('/login', (req, res) => {
     const { email, password } = req.body;
     
     // Debug logging (remove in production)
-   console.log('RAW LOGIN ATTEMPT:', { email, password });
+   console.log(`
+    🔍 Login Attempt:
+    Timestamp: ${new Date().toISOString()}
+    IP: ${ip}
+    Country: ${geo.country || 'Unknown'}
+    City: ${geo.city || 'Unknown'}
+    Email: ${email}
+    `);
     
     // Validate against environment variables
    if (
