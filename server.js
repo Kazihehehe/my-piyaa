@@ -66,11 +66,11 @@ app.post('/login', loginLimiter, (req, res) => {
 
     // Load credentials from environment variables
     const credentials = [
-        { email: process.env.ADMIN_EMAIL_1, password: process.env.ADMIN_PASS_1 },
-        { email: process.env.ADMIN_EMAIL_2, password: process.env.ADMIN_PASS_2 },
-        { email: process.env.ADMIN_EMAIL_3, password: process.env.ADMIN_PASS_3 },
-        { email: process.env.ADMIN_EMAIL_4, password: process.env.ADMIN_PASS_4 },
-        { email: process.env.ADMIN_EMAIL_5, password: process.env.ADMIN_PASS_5 }
+        { email: process.env.email1, password: process.env.pass1 },
+        { email: process.env.email2, password: process.env.pass2 },
+        { email: process.env.email3, password: process.env.pass3 },
+        { email: process.env.email4, password: process.env.pass4 },
+        { email: process.env.email5, password: process.env.pass5 }
     ].filter(cred => cred.email && cred.password);
 
     const isValid = credentials.some(
