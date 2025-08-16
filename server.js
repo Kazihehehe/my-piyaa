@@ -45,7 +45,8 @@ const loginLimiter = rateLimit({
 // ===== APPLICATION MIDDLEWARE =====
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public'))); // serve only public assets like CSS, JS, images
+
 
 // ===== SECURE LOGIN ROUTE =====
 app.post('/login', loginLimiter, (req, res) => {
@@ -88,7 +89,7 @@ app.post('/login', loginLimiter, (req, res) => {
 });
 
 // ===== AUTHORIZED ROUTES =====
-app.get('/home.html', (req, res) => {
+app.get('/home', (req, res) => {
     if (!req.session.authenticated) {
         return res.status(403).sendFile(path.join(__dirname, 'unauthorized.html'));
     }
