@@ -31,9 +31,11 @@ app.use(session({
     cookie: { 
         secure: true, // Requires HTTPS
         httpOnly: true,
+        sameSite: 'strict',
         maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
 }));
+
 
 // ===== RATE LIMITING =====
 const loginLimiter = rateLimit({
