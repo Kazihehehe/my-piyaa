@@ -1,0 +1,19 @@
+git clone https://github.com/kazihehehe/my-piyaa.git
+cd my-piyaa
+
+mkdir private
+
+mv Birthday-Girl.jpg birthday_song.mp3 crying_emoji.png final_reward.jpg home.html \
+img1-2009.jpg img1-2010.jpg img1-2012.jpg img1-2015.jpg img1-2016.JPG img1-2018.jpg \
+img1-2022.JPG img1-2024.jpg img1-2025.jpg img10-2025.jpg img11-2025.jpg img12-2025.jpg \
+img13-2025.jpg img14-2025.JPG img15-2025.JPG img16-2025.JPG img17-2025.JPG img18-2025.JPG \
+img19-2025.jpg img1_2023.jpg img2-2013.jpg img2-2024.jpg img2-2025.jpg img20-2025.jpg \
+img21-2025.jpg img22-2025.jpg img23-2025.jpg img24-2025.JPG img25-2025.JPG img26-2025.JPG \
+img27-2025.JPG img28-2025.JPG img29-2025.JPG img2_2023.jpg img3-2024.jpg img3-2025.jpg \
+img3_2023.jpg img4-2024.jpg img4-2025.jpg img4_2023.jpg img5-2023.jpg img5-2025.jpg \
+img6-2025.JPG img7-2025.jpg img8-2025.jpg img9-2025.jpg video1.mp4 package-lock.json \
+package.json piyaa.jpg server.js private/
+, private/
+git add .
+git commit -m "Moved 40 files into private folder"
+git push
